@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning
+{% endblock %}
+
+{% block body %}
+
+
+	<center>
+		<h1>
+			{{ moisencours }}
+
+			{{ an }}
+		</h1>
+		<table class="pl">
+			<tr>
+				<td class="pl">-----------------</td>
+				{% for i in range(1,nombrejoursmois) %}
+					<td class="pl">{{ i }}</td>
+				{% endfor %}
+
+			</tr>
+
+			<tr>
+				<td class="pl">-----------------</td>
+				{% for i in tabjour %}
+					<td class="pl">{{ i }}</td>
+				{% endfor %}
+
+			</tr>
+
+			<tr>
+				<td class="pl">-----------------</td>
+				{% for i in range(1,nombrejoursmois) %}
+					<td class="pl">ABCD</td>
+				{% endfor %}
+
+			</tr>
+		</table>
+	</center>
+{% endblock %}

@@ -1,3 +1,17 @@
 body {
-    background-color: skyblue;
+    background-color: rgb(216, 192, 192);
+}
+
+table.pl {
+    background-color: white;
+    border-style: solid;
+}
+
+td.pl {
+    border-style: outset;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+    font-size: x-small;
+    height: 5%;
 }
