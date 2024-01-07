@@ -11,19 +11,19 @@ class CalculsController extends AbstractController
     #[Route('/calculs', name: 'app_calculs')]
     public function index(): Response
     {
-        $tabreturn7 = $this->nombres_7maxi();
+        $tabreturn7 = $this->nombres_maxi(7);
         $liste7 = $tabreturn7[0];
         $nombre7 = $tabreturn7[1];
 
-        $tabreturn1 = $this->nombres_1maxi();
+        $tabreturn1 = $this->nombres_maxi(1);
         $liste1 = $tabreturn1[0];
         $nombre1 = $tabreturn1[1];
 
-        $tab_nombres_uniques7 = $this->combinaisons_uniques7();
+        $tab_nombres_uniques7 = $this->combinaisons_uniques(7);
         $liste_nombres_uniques7 = $tab_nombres_uniques7[0];
         $nombres_uniques7 = $tab_nombres_uniques7[1];
 
-        $tab_nombres_uniques1 = $this->combinaisons_uniques1();
+        $tab_nombres_uniques1 = $this->combinaisons_uniques(1);
         $liste_nombres_uniques1 = $tab_nombres_uniques1[0];
         $nombres_uniques1 = $tab_nombres_uniques1[1];
 
@@ -51,7 +51,7 @@ class CalculsController extends AbstractController
         return $tabnombres;
     }
 
-    private function verif()
+    private function verif(int $profondeur)
     {
         $tabnombres = $this->tableau();
 
@@ -61,7 +61,7 @@ class CalculsController extends AbstractController
             $chain = $tabnombres[$i];
             $tabnombreoperations[$i] = 1;
 
-            for ($y = 1; $y <= 8; $y++) { // au-delà de 7, ce n'est pas nécessaire...
+            for ($y = 1; $y <= $profondeur; $y++) { // au-delà de 7, ce n'est pas nécessaire...
 
                 $tabsort = str_split($chain);
 
@@ -82,14 +82,14 @@ class CalculsController extends AbstractController
         return $tabnombreoperations;
     }
 
-    private function nombres_7maxi()
+    private function nombres_maxi(int $profondeur)
     {
         $tab = $this->tableau();
         $nombre = 0;
         $liste = "";
-        $tabnombre_ops = $this->verif();
+        $tabnombre_ops = $this->verif($profondeur);
         for ($i = 0; $i <  count($tab); $i++) {
-            if ($tabnombre_ops[$i] <= 7) {
+            if ($tabnombre_ops[$i] <= $profondeur) {
                 $nombre++;
                 $liste .= $tab[$i] . '(' . $tabnombre_ops[$i] . ') ';
             }
@@ -100,33 +100,15 @@ class CalculsController extends AbstractController
         return $tabreturn;
     }
 
-    private function tab_nombres_7maxi()
+    private function tab_nombres_maxi(int $profondeur)
     {
         $tab = $this->tableau();
 
         $tabreturn = array();
 
-        $tabnombre_ops = $this->verif();
+        $tabnombre_ops = $this->verif($profondeur);
         for ($i = 0; $i <  count($tab); $i++) {
-            if ($tabnombre_ops[$i] <= 7) {
-
-                $tabreturn[] = $tab[$i];
-            }
-        }
-
-
-        return $tabreturn;
-    }
-
-    private function tab_nombres_1maxi()
-    {
-        $tab = $this->tableau();
-
-        $tabreturn = array();
-
-        $tabnombre_ops = $this->verif();
-        for ($i = 0; $i <  count($tab); $i++) {
-            if ($tabnombre_ops[$i] == 1) {
+            if ($tabnombre_ops[$i] <= $profondeur) {
 
                 $tabreturn[] = $tab[$i];
             }
@@ -137,69 +119,10 @@ class CalculsController extends AbstractController
     }
 
 
-
-    private function nombres_1maxi()
-    {
-        $tab = $this->tableau();
-        $tabnombre_ops = $this->verif();
-        $liste = "";
-        $nombre = 0;
-        for ($i = 0; $i <  count($tab); $i++) {
-            if ($tabnombre_ops[$i] == 1) {
-                $nombre++;
-                $liste .= $tab[$i] . ' ';
-            }
-        }
-
-        $tabreturn[0] = $liste;
-        $tabreturn[1] = $nombre;
-        return $tabreturn;
-    }
-
-
-    private function combinaisons_uniques7()
+    private function combinaisons_uniques(int $profondeur)
     {
 
-        $tab = $this->tab_nombres_7maxi();
-
-        $tab2 = array();
-
-        for ($i = 0; $i < count($tab); $i++) {
-
-            $chain = $tab[$i];
-
-            $tabsort = array();
-
-            $tabsort = str_split($chain);
-
-            rsort($tabsort);
-
-            $chain_desc = implode($tabsort);
-
-            if (!in_array($chain_desc, $tab2)) {
-
-                $tab2[] = $chain_desc;
-            }
-        }
-
-
-        $total = count($tab2);
-        $liste = "";
-        sort($tab2);
-        for ($i = 0; $i < count($tab2); $i++) {
-
-            $liste .= $tab2[$i] . ' ';
-        }
-
-        $tabreturn[0] = $liste;
-        $tabreturn[1] = $total;
-
-        return $tabreturn;
-    }
-
-    private function combinaisons_uniques1()
-    {
-        $tab = $this->tab_nombres_1maxi();
+        $tab = $this->tab_nombres_maxi($profondeur);
 
         $tab2 = array();
 
