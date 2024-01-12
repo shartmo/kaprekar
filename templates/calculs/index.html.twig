@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Algorithme de Kaprekar
+{% endblock %}
+
+{% block body %}
+
+
+	<center>
+		<h1>Constante de Kaprekar</h1>
+
+
+		<h1>Total des nombres en 4 chiffres ({{nombre}}) qui donnent 6174 en 7 soustractions au maximum :
+		</h1>
+
+
+		<h5>
+			{{ liste }}
+		</h5>
+
+		<h1>
+			Nombre de combinaisons uniques :
+			{{nombres_uniques7}}
+		</h1>
+
+		<h5>
+			{{liste_nombres_uniques7}}
+		</h5>
+
+		<h1>Total des nombres en 4 chiffres ({{nombre_une_fois}}) qui donnent 6174 en 1 soustraction au maximum :
+		</h1>
+
+		<h5>
+			{{ liste_une_fois }}
+		</h5>
+
+		<h1>
+			Nombre de combinaisons uniques :
+			{{nombres_uniques1}}
+		</h1>
+
+		<h5>
+			{{liste_nombres_uniques1}}
+		</h5>
+
+	</center>
+{% endblock %}

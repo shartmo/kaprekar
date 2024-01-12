@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(216, 192, 192);
+}
+
+table.pl {
+    background-color: white;
+    border-style: solid;
+    border-color: gray;
+}
+
+td.pl {
+    border-style: outset;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+    font-size: x-small;
+    height: 5%;
+}
+
+td.we {
+    border-style: outset;
+    background-color: gray;
+    color: white;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+    font-size: x-small;
+    height: 5%;
+}
